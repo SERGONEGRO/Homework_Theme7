@@ -62,7 +62,7 @@ namespace Homework_Theme7_task1._1
         /// </summary>
         private void Load()
         {
-            using (StreamReader sr = new StreamReader(this.path))
+            using (StreamReader sr = new StreamReader(this.path,Encoding.Default))
             {
                 titles = sr.ReadLine().Split(',');
 
@@ -93,7 +93,7 @@ namespace Homework_Theme7_task1._1
                                             this.titles[3],
                                             this.titles[4]);
 
-            File.AppendAllText(Path, $"{temp}\n");
+            File.AppendAllText(Path, $"{temp}\n",Encoding.);
 
             for (int i = 0; i < this.index; i++)
             {
@@ -112,11 +112,12 @@ namespace Homework_Theme7_task1._1
         /// </summary>
         public void PrintDbToConsole()
         {
-            Console.WriteLine($"{this.titles[0],15} {this.titles[1],15} {this.titles[4],15} {this.titles[2],15} {this.titles[3],10}");
+            Console.WriteLine($"{this.titles[0],10} {this.titles[1],20} {this.titles[2],20} {this.titles[3],20} {this.titles[4],30}");
 
             for (int i = 0; i < index; i++)
             {
                 Console.WriteLine(this.records[i].Print());
+                Console.WriteLine();
             }
         }
 

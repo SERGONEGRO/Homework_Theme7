@@ -62,7 +62,7 @@ namespace Homework_Theme7_task1._1
         /// <summary>
         /// Счёт плательщика
         /// </summary>
-        public int PaymentAccount { get {return this.paymentAccount } set { this.paymentAccount = value; } }
+        public int PaymentAccount { get { return this.paymentAccount; } set { this.paymentAccount = value; } }
 
         #endregion
 
@@ -141,7 +141,7 @@ namespace Homework_Theme7_task1._1
         /// <returns>строка записи</returns>
         public string Print()
         {
-            return $"{this.date,15} {this.partnerName,15} {this.income,15} {this.paymentAccount,15} {this.purpose,10}";
+            return $"{this.date.ToString("d"),10} {this.partnerName,20} {this.income,20} {this.paymentAccount,20} {this.purpose,30}";
         }
 
         #endregion

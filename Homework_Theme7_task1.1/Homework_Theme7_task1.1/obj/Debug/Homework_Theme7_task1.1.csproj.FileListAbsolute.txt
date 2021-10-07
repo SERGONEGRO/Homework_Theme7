@@ -1,0 +1,7 @@
+C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.csproj.AssemblyReference.cache
+C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.csproj.CoreCompileInputs.cache
+C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\bin\Debug\Homework_Theme7_task1.1.exe.config
+C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\bin\Debug\Homework_Theme7_task1.1.exe
+C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\bin\Debug\Homework_Theme7_task1.1.pdb
+C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.exe
+C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.pdb
