@@ -146,8 +146,5 @@ namespace Homework_Theme7_task1._1
 
         #endregion
 
-       
-
-     
     }
 }
