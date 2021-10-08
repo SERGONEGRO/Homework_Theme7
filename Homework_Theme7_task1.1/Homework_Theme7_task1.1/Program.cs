@@ -75,7 +75,11 @@ namespace Homework_Theme7_task1._1
                     case "3":
                         {
                             Console.Clear();
-                            Console.WriteLine("Редактирование записи");
+                            Console.WriteLine("Введите номер записи для редактирования:");
+
+                            int recordNumber = EnterNumber();
+                            ChangeRecord(recordNumber);
+
                             Console.ReadKey();
                             break;
                         }
@@ -105,7 +109,7 @@ namespace Homework_Theme7_task1._1
         /// Ввод числа 
         /// </summary>
         /// <returns>число</returns>
-        static int EnterNumber()
+        static public int EnterNumber()
         {
             int number;
             while (!int.TryParse(Console.ReadLine(), out number))
@@ -145,6 +149,17 @@ namespace Homework_Theme7_task1._1
             DateBook sourceBook = new DateBook(source);
             sourceBook.SaveToFile(path);
             Console.WriteLine($"Добавлено записей: {sourceBook.Count}");
+        }
+
+        /// <summary>
+        /// Изменение выбранной записи
+        /// </summary>
+        /// <param name="recordNum">Номер записи</param>
+        static void ChangeRecord(int recordNum)
+        {
+            DateBook dateBook = new DateBook(path);
+            dateBook.ChangeRecord(recordNum-1, path);
+            Console.WriteLine("Запись изменена!");
         }
     }
 

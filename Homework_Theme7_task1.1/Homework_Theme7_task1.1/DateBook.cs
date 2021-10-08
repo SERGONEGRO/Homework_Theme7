@@ -81,9 +81,6 @@ namespace Homework_Theme7_task1._1
             }
         }
 
-
-
-
         /// <summary>
         /// Метод сохранения данных
         /// </summary>
@@ -133,6 +130,68 @@ namespace Homework_Theme7_task1._1
             }
         }
 
+       /// <summary>
+       /// Изменение заданной строки
+       /// </summary>
+       /// <param name="recNum">Номер записи</param>
+       /// <param name="Path">Путь к файлу</param>
+        public void ChangeRecord(int recNum,string Path)
+        {
+            string temp = String.Format("{0},{1},{2},{3},{4}",
+                                               this.titles[0],
+                                               this.titles[1],
+                                               this.titles[2],
+                                               this.titles[3],
+                                               this.titles[4]);
+
+            File.Delete(path);
+            File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
+
+            for (int i = 0; i < this.index; i++)
+            {
+                temp = String.Format("{0},{1},{2},{3},{4}",
+                                        this.records[i].Date,
+                                        this.records[i].PartnerName,
+                                        this.records[i].Income,
+                                        this.records[i].PaymentAccount,
+                                        this.records[i].Purpose);
+
+                File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
+            }
+
+
+
+            Console.WriteLine("Редактируется строка:\n{0},{1},{2},{3},{4}",
+                                        this.records[recNum].Date,
+                                        this.records[recNum].PartnerName,
+                                        this.records[recNum].Income,
+                                        this.records[recNum].PaymentAccount,
+                                        this.records[recNum].Purpose);
+
+            Console.WriteLine("Введите имя партнера:");
+            this.records[recNum].PartnerName = Console.ReadLine();
+
+            Console.WriteLine("Введите Сумму:");
+            this.records[recNum].Income = Program.EnterNumber();
+
+            Console.WriteLine("Введите Платежный счет:");
+            this.records[recNum].PaymentAccount = Program.EnterNumber();
+
+            Console.WriteLine("Введите назначение платежа:");
+            this.records[recNum].Purpose = Console.ReadLine();
+
+
+            string temp = String.Format("{0},{1},{2},{3},{4}",
+                                        this.records[recNum].Date,
+                                        this.records[recNum].PartnerName,
+                                        this.records[recNum].Income,
+                                        this.records[recNum].PaymentAccount,
+                                        this.records[recNum].Purpose);
+
+            File.WriteAllLines(Path, $"{temp}\n", Encoding.Default);
+           
+        }
+
         /// <summary>
         /// Вывод данных в консоль
         /// </summary>
@@ -142,7 +201,7 @@ namespace Homework_Theme7_task1._1
 
             for (int i = 0; i < index; i++)
             {
-                Console.WriteLine(this.records[i].Print());
+                Console.WriteLine($"{i+1}  {this.records[i].Print()}");
                 Console.WriteLine();
             }
         }
