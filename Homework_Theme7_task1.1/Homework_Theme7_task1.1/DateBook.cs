@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Homework_Theme7_task1._1
 {
     /// <summary>
@@ -93,7 +94,8 @@ namespace Homework_Theme7_task1._1
                                             this.titles[3],
                                             this.titles[4]);
 
-            File.AppendAllText(Path, $"{temp}\n",Encoding.);
+            File.Delete(path);
+            File.AppendAllText(Path, $"{temp}\n",Encoding.UTF8);
 
             for (int i = 0; i < this.index; i++)
             {
@@ -103,6 +105,7 @@ namespace Homework_Theme7_task1._1
                                         this.records[i].Income,
                                         this.records[i].PaymentAccount,
                                         this.records[i].Purpose);
+                
                 File.AppendAllText(Path, $"{temp}\n");
             }
         }
