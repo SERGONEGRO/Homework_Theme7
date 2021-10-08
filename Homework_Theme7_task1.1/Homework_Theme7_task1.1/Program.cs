@@ -95,21 +95,7 @@ namespace Homework_Theme7_task1._1
                         }
                     default: break;
                 }
-                
-
-                //DateBook dateBook = new DateBook(path);
-
-                //dateBook.PrintDbToConsole();
-                //Console.WriteLine(dateBook.Count);
-
-                //dateBook.Add(new Record(DateTime.Now, "Kitaec", 10000, 7732177, "Teplaya kitaiskaya kurtka"));
-
-                //dateBook.PrintDbToConsole();
-                //Console.WriteLine(dateBook.Count);
-
-                //dateBook.Save("newdata.csv");
-
-                //Console.ReadKey();
+          
             } 
             while (answer != "0");
         }
@@ -158,7 +144,7 @@ namespace Homework_Theme7_task1._1
         {
             DateBook sourceBook = new DateBook(source);
             sourceBook.SaveToFile(path);
-            Console.WriteLine("Запись добавлена!");
+            Console.WriteLine($"Добавлено записей: {sourceBook.Count}");
         }
     }
 

@@ -34,16 +34,7 @@ namespace Homework_Theme7_task1._1
             
             this.Load(); // Загрузка данных
         }
-        //public RecordsFromFile(string Path)
-        //{
-        //    this.path = Path; // Сохранение пути к файлу с данными
-        //    this.index = 0; // текущая позиция для добавления записи в records
-        //    this.titles = new string[0]; // инициализаия массива заголовков   
-        //    this.records = new Record[1]; // инициализаия массива записей.    | изначально предпологаем, что данных нет
-
-        //    this.Load(); // Загрузка данных
-        //}
-
+       
         /// <summary>
         /// Метод увеличения текущего хранилища
         /// </summary>
@@ -72,7 +63,7 @@ namespace Homework_Theme7_task1._1
         /// </summary>
         private void Load()
         {
-            using (StreamReader sr = new StreamReader(this.path,Encoding.UTF8))
+            using (StreamReader sr = new StreamReader(this.path,Encoding.Default))
             {
                 titles = sr.ReadLine().Split(',');
 
@@ -107,7 +98,7 @@ namespace Homework_Theme7_task1._1
                                             this.titles[4]);
 
             File.Delete(path);
-            File.AppendAllText(Path, $"{temp}\n",Encoding.UTF8);
+            File.AppendAllText(Path, $"{temp}\n",Encoding.Default);
 
             for (int i = 0; i < this.index; i++)
             {
@@ -118,7 +109,7 @@ namespace Homework_Theme7_task1._1
                                         this.records[i].PaymentAccount,
                                         this.records[i].Purpose);
                 
-                File.AppendAllText(Path, $"{temp}\n");
+                File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
             }
         }
 
@@ -138,7 +129,7 @@ namespace Homework_Theme7_task1._1
                                         this.records[i].PaymentAccount,
                                         this.records[i].Purpose);
 
-                File.AppendAllText(Path, $"{temp}\n", Encoding.UTF8);
+                File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
             }
         }
 
