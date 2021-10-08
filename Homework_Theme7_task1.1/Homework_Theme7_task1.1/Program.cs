@@ -62,7 +62,7 @@ namespace Homework_Theme7_task1._1
 
                             if( Console.ReadLine()=="1")
                             {
-                                Console.WriteLine("загрузка из файла");
+                                FileAdd();
                             }
                             else
                             {
@@ -151,10 +151,14 @@ namespace Homework_Theme7_task1._1
             Console.WriteLine("Запись добавлена!");
         }
 
+        /// <summary>
+        /// Добавление записей из файла
+        /// </summary>
         static void FileAdd()
         {
-            DateBook dateBook = new DateBook(path);
             DateBook sourceBook = new DateBook(source);
+            sourceBook.SaveToFile(path);
+            Console.WriteLine("Запись добавлена!");
         }
     }
 

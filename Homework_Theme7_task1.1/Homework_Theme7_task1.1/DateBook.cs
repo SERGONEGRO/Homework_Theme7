@@ -72,7 +72,7 @@ namespace Homework_Theme7_task1._1
         /// </summary>
         private void Load()
         {
-            using (StreamReader sr = new StreamReader(this.path,Encoding.Default))
+            using (StreamReader sr = new StreamReader(this.path,Encoding.UTF8))
             {
                 titles = sr.ReadLine().Split(',');
 
@@ -90,29 +90,6 @@ namespace Homework_Theme7_task1._1
             }
         }
 
-
-        /// <summary>
-        /// Метод загрузки данных из файла
-        /// </summary>
-        private void LoadFromFile()
-        {
-            using (StreamReader sr = new StreamReader(this.path, Encoding.Default))
-            {
-                //titles = sr.ReadLine().Split(',');
-
-
-                while (!sr.EndOfStream)
-                {
-                    string[] args = sr.ReadLine().Split(',');
-
-                    Add(new Record(Convert.ToDateTime(args[0]),
-                                           args[1],
-                                           Convert.ToInt32(args[2]),
-                                           Convert.ToInt32(args[3]),
-                                           args[4]));
-                }
-            }
-        }
 
 
 
@@ -142,6 +119,26 @@ namespace Homework_Theme7_task1._1
                                         this.records[i].Purpose);
                 
                 File.AppendAllText(Path, $"{temp}\n");
+            }
+        }
+
+        /// <summary>
+        /// Метод сохранения данных из файла в файл
+        /// </summary>
+        /// <param name="Path">Путь к файлу сохранения</param>
+        public void SaveToFile(string Path)
+        {
+            
+            for (int i = 0; i < this.index; i++)
+            {
+                string temp = String.Format("{0},{1},{2},{3},{4}",
+                                        this.records[i].Date,
+                                        this.records[i].PartnerName,
+                                        this.records[i].Income,
+                                        this.records[i].PaymentAccount,
+                                        this.records[i].Purpose);
+
+                File.AppendAllText(Path, $"{temp}\n", Encoding.UTF8);
             }
         }
 
