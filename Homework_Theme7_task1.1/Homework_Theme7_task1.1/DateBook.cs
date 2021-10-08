@@ -30,10 +30,19 @@ namespace Homework_Theme7_task1._1
             this.path = Path; // Сохранение пути к файлу с данными
             this.index = 0; // текущая позиция для добавления записи в records
             this.titles = new string[0]; // инициализаия массива заголовков   
-            this.records = new Record[1]; // инициализаия массива записей.    | изначально предпологаем, что данных нет
-
+            this.records = new Record[1]; // инициализация массива записей.    | изначально предпологаем, что данных нет
+            
             this.Load(); // Загрузка данных
         }
+        //public RecordsFromFile(string Path)
+        //{
+        //    this.path = Path; // Сохранение пути к файлу с данными
+        //    this.index = 0; // текущая позиция для добавления записи в records
+        //    this.titles = new string[0]; // инициализаия массива заголовков   
+        //    this.records = new Record[1]; // инициализаия массива записей.    | изначально предпологаем, что данных нет
+
+        //    this.Load(); // Загрузка данных
+        //}
 
         /// <summary>
         /// Метод увеличения текущего хранилища
@@ -80,6 +89,32 @@ namespace Homework_Theme7_task1._1
                 }
             }
         }
+
+
+        /// <summary>
+        /// Метод загрузки данных из файла
+        /// </summary>
+        private void LoadFromFile()
+        {
+            using (StreamReader sr = new StreamReader(this.path, Encoding.Default))
+            {
+                //titles = sr.ReadLine().Split(',');
+
+
+                while (!sr.EndOfStream)
+                {
+                    string[] args = sr.ReadLine().Split(',');
+
+                    Add(new Record(Convert.ToDateTime(args[0]),
+                                           args[1],
+                                           Convert.ToInt32(args[2]),
+                                           Convert.ToInt32(args[3]),
+                                           args[4]));
+                }
+            }
+        }
+
+
 
         /// <summary>
         /// Метод сохранения данных
