@@ -103,6 +103,7 @@ namespace Homework_Theme7_task1._1
                                 while (dateBook.Count < answerDel || answerDel < 1);
 
                                 dateBook.DeleteRecord(answerDel-1);
+                                
 
                                 Console.WriteLine("Запись удалена!");
                             }
@@ -112,7 +113,9 @@ namespace Homework_Theme7_task1._1
                     case "5":
                         {
                             Console.Clear();
-                            Console.WriteLine("Упорядочивание записей");
+                            DateBook dateBook = new DateBook(path);
+                            dateBook.OrderRecords();
+                            Console.WriteLine("Упорядочивание записей завершено");
                             Console.ReadKey();
                             break;
                         }

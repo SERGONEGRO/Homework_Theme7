@@ -116,7 +116,7 @@ namespace Homework_Theme7_task1._1
         /// <param name="Path">Путь к файлу сохранения</param>
         public void SaveToFile(string Path)
         {
-
+            //Пропускаем заголовки, считываем сразу записи
             for (int i = 0; i < this.index; i++)
             {
                 string temp = String.Format("{0},{1},{2},{3},{4}",
@@ -168,6 +168,7 @@ namespace Homework_Theme7_task1._1
 
             for (int i = 0; i < this.index; i++)
             {
+                //Если запись  - та, которую нужно редактировать, то:
                 if (i == recNum)
                 {
                     this.records[i].Date = DateTime.Now;
@@ -233,10 +234,43 @@ namespace Homework_Theme7_task1._1
                                         this.records[i].Income,
                                         this.records[i].PaymentAccount,
                                         this.records[i].Purpose);
+                //Записываем все строки, кроме той, которую удаляем.
                 if (i != numDel)
                 {
                     File.AppendAllText(path, $"{temp}\n", Encoding.Default);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Упорядочивает записи по Дате
+        /// </summary>
+        public void OrderRecords()
+        {
+            //непонятная сортировка, нашел в интернете.
+            Array.Sort(records, (a, b) => a.Date.CompareTo(b.Date));
+
+            string temp = String.Format("{0},{1},{2},{3},{4}",
+                                               this.titles[0],
+                                               this.titles[1],
+                                               this.titles[2],
+                                               this.titles[3],
+                                               this.titles[4]);
+
+            File.Delete(path);
+            File.AppendAllText(path, $"{temp}\n", Encoding.Default);
+
+            for (int i = 0; i < this.index; i++)
+            {
+                temp = String.Format("{0},{1},{2},{3},{4}",
+                                        this.records[i].Date,
+                                        this.records[i].PartnerName,
+                                        this.records[i].Income,
+                                        this.records[i].PaymentAccount,
+                                        this.records[i].Purpose);
+               
+                File.AppendAllText(path, $"{temp}\n", Encoding.Default);
+                
             }
         }
 
