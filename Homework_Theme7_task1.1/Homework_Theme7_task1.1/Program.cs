@@ -75,10 +75,8 @@ namespace Homework_Theme7_task1._1
                     case "3":
                         {
                             Console.Clear();
-                            Console.WriteLine("Введите номер записи для редактирования:");
-
-                            int recordNumber = EnterNumber();
-                            ChangeRecord(recordNumber);
+                            
+                            ChangeRecord();
 
                             Console.ReadKey();
                             break;
@@ -86,7 +84,28 @@ namespace Homework_Theme7_task1._1
                     case "4":
                         {
                             Console.Clear();
-                            Console.WriteLine("Удаление записей");
+                            DateBook dateBook = new DateBook(path);
+                            
+                            Console.WriteLine("Если нужно удалить все, введите ALL");
+                            if(Console.ReadLine() == "ALL")
+                            {
+                                dateBook.DeleteRecord();
+                                break;
+                            }
+                            else
+                            {
+                                int answerDel;
+                                do
+                                {
+                                    Console.WriteLine("Введите номер записи, которую хотите удалить:");
+                                    answerDel = EnterNumber();
+                                }
+                                while (dateBook.Count < answerDel || answerDel < 1);
+
+                                dateBook.DeleteRecord(answerDel-1);
+
+                                Console.WriteLine("Запись удалена!");
+                            }
                             Console.ReadKey();
                             break;
                         }
@@ -154,11 +173,22 @@ namespace Homework_Theme7_task1._1
         /// <summary>
         /// Изменение выбранной записи
         /// </summary>
-        /// <param name="recordNum">Номер записи</param>
-        static void ChangeRecord(int recordNum)
+        static void ChangeRecord()
         {
             DateBook dateBook = new DateBook(path);
-            dateBook.ChangeRecord(recordNum-1, path);
+
+            int recordNumber;
+
+            do
+            {
+                Console.WriteLine("Введите номер записи для редактирования:");
+                recordNumber = EnterNumber()-1;
+            }
+            while (dateBook.Count<recordNumber || recordNumber<1);
+            
+
+            
+            dateBook.ChangeRecord(recordNumber, path);
             Console.WriteLine("Запись изменена!");
         }
     }
