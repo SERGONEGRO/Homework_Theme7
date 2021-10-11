@@ -147,20 +147,6 @@ namespace Homework_Theme7_task1._1
             File.Delete(path);
             File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
 
-            for (int i = 0; i < this.index; i++)
-            {
-                temp = String.Format("{0},{1},{2},{3},{4}",
-                                        this.records[i].Date,
-                                        this.records[i].PartnerName,
-                                        this.records[i].Income,
-                                        this.records[i].PaymentAccount,
-                                        this.records[i].Purpose);
-
-                File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
-            }
-
-
-
             Console.WriteLine("Редактируется строка:\n{0},{1},{2},{3},{4}",
                                         this.records[recNum].Date,
                                         this.records[recNum].PartnerName,
@@ -169,28 +155,42 @@ namespace Homework_Theme7_task1._1
                                         this.records[recNum].Purpose);
 
             Console.WriteLine("Введите имя партнера:");
-            this.records[recNum].PartnerName = Console.ReadLine();
+            string tempPartnerName = Console.ReadLine();
 
             Console.WriteLine("Введите Сумму:");
-            this.records[recNum].Income = Program.EnterNumber();
+            int tempIncome = Program.EnterNumber();
 
             Console.WriteLine("Введите Платежный счет:");
-            this.records[recNum].PaymentAccount = Program.EnterNumber();
+            int tempPaymentAccount = Program.EnterNumber();
 
             Console.WriteLine("Введите назначение платежа:");
-            this.records[recNum].Purpose = Console.ReadLine();
+             string tempPurpose = Console.ReadLine();
 
+            for (int i = 0; i < this.index; i++)
+            {
+                if(i==recNum)
+                {
+                    this.records[i].Date = DateTime.Now;
+                    this.records[i].PartnerName = tempPartnerName;
+                    this.records[i].Income = tempIncome;
+                    this.records[i].PaymentAccount = tempPaymentAccount;
+                    this.records[i].Purpose = tempPurpose;
+                    
+                }
+    
+                temp = String.Format("{0},{1},{2},{3},{4}",
+                                        this.records[i].Date,
+                                        this.records[i].PartnerName,
+                                        this.records[i].Income,
+                                        this.records[i].PaymentAccount,
+                                        this.records[i].Purpose);
 
-            string temp = String.Format("{0},{1},{2},{3},{4}",
-                                        this.records[recNum].Date,
-                                        this.records[recNum].PartnerName,
-                                        this.records[recNum].Income,
-                                        this.records[recNum].PaymentAccount,
-                                        this.records[recNum].Purpose);
-
-            File.WriteAllLines(Path, $"{temp}\n", Encoding.Default);
-           
+                File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
+            
+            }
+   
         }
+
 
         /// <summary>
         /// Вывод данных в консоль
@@ -210,6 +210,9 @@ namespace Homework_Theme7_task1._1
         /// Количество сотрудников в хранилище
         /// </summary>
         public int Count { get { return this.index; } }
-
-    }
+   }
 }
+
+    
+
+
