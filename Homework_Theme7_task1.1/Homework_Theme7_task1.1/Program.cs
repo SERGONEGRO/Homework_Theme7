@@ -24,8 +24,8 @@ namespace Homework_Theme7_task1._1
 {
     class Program
     {
-        static string path = @"data.csv";
-        static string source = @"source.csv";
+        static string path = @"data.csv";          //путь к основному файлу
+        static string source = @"source.csv";      //путь к файлу, из которого данные загружаются в основной файл
 
         static void Main(string[] args)
         {
