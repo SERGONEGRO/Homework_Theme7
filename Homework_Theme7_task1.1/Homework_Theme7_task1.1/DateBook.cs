@@ -13,7 +13,7 @@ namespace Homework_Theme7_task1._1
     /// </summary>
     struct DateBook
     {
-        private Record[] records; // Основной массив для хранения данных
+        public Record[] records; // Основной массив для хранения данных
 
         private string path; // путь к файлу с данными
 
@@ -53,7 +53,9 @@ namespace Homework_Theme7_task1._1
         /// <param name="ConcreteRecord">Запись</param>
         public void Add(Record ConcreteRecord)
         {
+           
             this.Resize(index >= this.records.Length);
+          
             this.records[index] = ConcreteRecord;
             this.index++;
         }
@@ -111,102 +113,29 @@ namespace Homework_Theme7_task1._1
         }
 
         /// <summary>
-        /// Метод сохранения данных из файла в файл
-        /// </summary>
-        /// <param name="Path">Путь к файлу сохранения</param>
-        public void SaveToFile(string Path)
-        {
-            //Пропускаем заголовки, считываем сразу записи
-            for (int i = 0; i < this.index; i++)
-            {
-                string temp = String.Format("{0},{1},{2},{3},{4}",
-                                        this.records[i].Date,
-                                        this.records[i].PartnerName,
-                                        this.records[i].Income,
-                                        this.records[i].PaymentAccount,
-                                        this.records[i].Purpose);
-
-                File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
-            }
-        }
-
-        /// <summary>
         /// Изменение заданной строки
         /// </summary>
         /// <param name="recNum">Номер записи</param>
         /// <param name="Path">Путь к файлу</param>
-        public void ChangeRecord(int recNum, string Path)
+        public void ChangeRecord(int index, string partName, int inc, int acc, string purp)
         {
-            string temp = String.Format("{0},{1},{2},{3},{4}",
-                                               this.titles[0],
-                                               this.titles[1],
-                                               this.titles[2],
-                                               this.titles[3],
-                                               this.titles[4]);
-
-            File.Delete(path);
-            File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
-
-            Console.WriteLine("Редактируется строка:\n{0},{1},{2},{3},{4}",
-                                        this.records[recNum].Date,
-                                        this.records[recNum].PartnerName,
-                                        this.records[recNum].Income,
-                                        this.records[recNum].PaymentAccount,
-                                        this.records[recNum].Purpose);
-
-            Console.WriteLine("Введите имя партнера:");
-            string tempPartnerName = Console.ReadLine();
-
-            Console.WriteLine("Введите Сумму:");
-            int tempIncome = Program.EnterNumber();
-
-            Console.WriteLine("Введите Платежный счет:");
-            int tempPaymentAccount = Program.EnterNumber();
-
-            Console.WriteLine("Введите назначение платежа:");
-            string tempPurpose = Console.ReadLine();
-
-            for (int i = 0; i < this.index; i++)
-            {
-                //Если запись  - та, которую нужно редактировать, то:
-                if (i == recNum)
-                {
-                    this.records[i].Date = DateTime.Now;
-                    this.records[i].PartnerName = tempPartnerName;
-                    this.records[i].Income = tempIncome;
-                    this.records[i].PaymentAccount = tempPaymentAccount;
-                    this.records[i].Purpose = tempPurpose;
-
-                }
-
-                temp = String.Format("{0},{1},{2},{3},{4}",
-                                        this.records[i].Date,
-                                        this.records[i].PartnerName,
-                                        this.records[i].Income,
-                                        this.records[i].PaymentAccount,
-                                        this.records[i].Purpose);
-
-                File.AppendAllText(Path, $"{temp}\n", Encoding.Default);
-
-            }
+            this.records[index].Date = DateTime.Now;
+            this.records[index].PartnerName = partName;
+            this.records[index].Income = inc;
+            this.records[index].PaymentAccount = acc;
+            this.records[index].Purpose = purp;
 
         }
 
         /// <summary>
         /// Удаляет все строки
         /// </summary>
-        public void DeleteRecord()
+        public void DeleteRecords()
         {
-            string temp = String.Format("{0},{1},{2},{3},{4}",
-                                               this.titles[0],
-                                               this.titles[1],
-                                               this.titles[2],
-                                               this.titles[3],
-                                               this.titles[4]);
-
-            File.Delete(path);
-            File.AppendAllText(path, $"{temp}\n", Encoding.Default);
-            Console.WriteLine();
+            records = new Record[1];
+            
+            this.index = 0;
+            
         }
 
 
@@ -214,32 +143,12 @@ namespace Homework_Theme7_task1._1
         /// Удаляет заданную строку
         /// </summary>
         /// <param name="i">номер строки</param>
-        public void DeleteRecord(int numDel)
+        public void DeleteRecords(int numDel)
         {
-            string temp = String.Format("{0},{1},{2},{3},{4}",
-                                               this.titles[0],
-                                               this.titles[1],
-                                               this.titles[2],
-                                               this.titles[3],
-                                               this.titles[4]);
-
-            File.Delete(path);
-            File.AppendAllText(path, $"{temp}\n", Encoding.Default);
-
-            for (int i = 0; i < this.index; i++)
-            {
-                temp = String.Format("{0},{1},{2},{3},{4}",
-                                        this.records[i].Date,
-                                        this.records[i].PartnerName,
-                                        this.records[i].Income,
-                                        this.records[i].PaymentAccount,
-                                        this.records[i].Purpose);
-                //Записываем все строки, кроме той, которую удаляем.
-                if (i != numDel)
-                {
-                    File.AppendAllText(path, $"{temp}\n", Encoding.Default);
-                }
-            }
+            List<Record> tmp = new List<Record>(records);
+            tmp.RemoveAt(numDel);
+            records = tmp.ToArray();
+            index--;
         }
 
         /// <summary>
@@ -280,11 +189,14 @@ namespace Homework_Theme7_task1._1
         public void PrintDbToConsole()
         {
             Console.WriteLine($"{this.titles[0],10} {this.titles[1],20} {this.titles[2],20} {this.titles[3],20} {this.titles[4],30}");
-
-            for (int i = 0; i < index; i++)
+            
+            if (this.records.Length>0 )
             {
-                Console.WriteLine($"{i+1}  {this.records[i].Print()}");
-                Console.WriteLine();
+                for (int i = 0; i < index; i++)
+                {
+                    Console.WriteLine($"{i + 1}  {this.records[i].Print()}");
+                    Console.WriteLine();
+                }
             }
         }
 

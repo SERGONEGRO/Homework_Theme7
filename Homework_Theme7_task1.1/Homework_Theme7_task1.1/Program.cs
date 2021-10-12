@@ -29,7 +29,7 @@ namespace Homework_Theme7_task1._1
 
         static void Main(string[] args)
         {
-            
+            DateBook dateBook = new DateBook(path);
 
             string answer="1";
             do
@@ -37,7 +37,7 @@ namespace Homework_Theme7_task1._1
                 Console.Clear();
                 Console.WriteLine("\t\t----ВЫБЕРИТЕ ПУНКТ МЕНЮ----\n");
                 Console.WriteLine("1 - Показать все записи \n2 - Создание новой записи \n3 - Редактирование записи \n" +
-                                  "4 - Удаление записей \n5 - Упорядочивание записей \n0 - ВЫХОД");
+                                  "4 - Удаление записей \n5 - Упорядочивание записей \n6 - СОХРАНИТЬ ИЗМЕНЕНИЯ\n0 - ВЫХОД");
 
                 answer = Console.ReadLine();
 
@@ -46,8 +46,6 @@ namespace Homework_Theme7_task1._1
                     case "1":
                         {
                             Console.Clear();
-
-                            DateBook dateBook = new DateBook(path);
 
                             dateBook.PrintDbToConsole();
                             Console.WriteLine($"\n\tВСЕГО ЗАПИСЕЙ: {dateBook.Count}") ;
@@ -62,11 +60,30 @@ namespace Homework_Theme7_task1._1
 
                             if( Console.ReadLine()=="1")
                             {
-                                FileAdd();
+                                DateBook sourceBook = new DateBook(source);
+                                
+                                foreach (Record rec in sourceBook.records)
+                                {
+                                    dateBook.Add(rec);
+                                }
+
+                                Console.WriteLine($"Добавлено записей: {sourceBook.Count}");
                             }
                             else
                             {
-                                ManualAdd();
+                                Console.WriteLine("\tВведите имя партнера:");
+                                string partName = Console.ReadLine();
+                                Console.WriteLine("\tВведите сумму платежа:");
+                                int incom = EnterNumber();
+                                Console.WriteLine("\tНомер счета:");
+                                int account = EnterNumber();
+                                Console.WriteLine("\tЦель платежа:");
+                                string purp = Console.ReadLine();
+
+                                dateBook.Add(new Record(DateTime.Now, partName, incom, account, purp));
+
+                                dateBook.Save(path);
+                                Console.WriteLine("Запись добавлена!");
                             }
                             
                             Console.ReadKey();
@@ -75,8 +92,35 @@ namespace Homework_Theme7_task1._1
                     case "3":
                         {
                             Console.Clear();
-                            
-                            ChangeRecord();
+
+                            int recordNumber;
+
+                            do
+                            {
+                                Console.WriteLine("Введите номер записи для редактирования:");
+                                recordNumber = EnterNumber() - 1;
+                            }
+                            while (dateBook.records.Length < recordNumber || recordNumber < 1);
+
+                            Console.WriteLine($"Редактируется запись:\n{dateBook.records[recordNumber].Print()}");
+                           
+
+
+                            Console.WriteLine("Введите имя партнера:");
+                            string tempPartnerName = Console.ReadLine();
+
+                            Console.WriteLine("Введите Сумму:");
+                            int tempIncome = Program.EnterNumber();
+
+                            Console.WriteLine("Введите Платежный счет:");
+                            int tempPaymentAccount = Program.EnterNumber();
+
+                            Console.WriteLine("Введите назначение платежа:");
+                            string tempPurpose = Console.ReadLine();
+
+
+                            dateBook.ChangeRecord(recordNumber,tempPartnerName,tempIncome,tempPaymentAccount,tempPurpose);
+                            Console.WriteLine("Запись изменена!");
 
                             Console.ReadKey();
                             break;
@@ -84,39 +128,52 @@ namespace Homework_Theme7_task1._1
                     case "4":
                         {
                             Console.Clear();
-                            DateBook dateBook = new DateBook(path);
-                            
+                           
                             Console.WriteLine("Если нужно удалить все, введите ALL");
-                            if(Console.ReadLine() == "ALL")
+
+                            if (Console.ReadLine() == "ALL")
                             {
-                                dateBook.DeleteRecord();
+                                dateBook.DeleteRecords();
                                 break;
                             }
                             else
                             {
                                 int answerDel;
-                                do
+                                if (dateBook.Count > 0)
                                 {
-                                    Console.WriteLine("Введите номер записи, которую хотите удалить:");
-                                    answerDel = EnterNumber();
+                                    do
+                                    {
+                                        Console.WriteLine("Введите номер записи, которую хотите удалить:");
+                                        answerDel = EnterNumber();
+                                    }
+                                    while (dateBook.Count < answerDel || answerDel < 1);
+
+                                    dateBook.DeleteRecords(answerDel - 1);
+                                    Console.WriteLine("Запись удалена!");
+
                                 }
-                                while (dateBook.Count < answerDel || answerDel < 1);
+                                else Console.WriteLine("Нет записей для удаления");
 
-                                dateBook.DeleteRecord(answerDel-1);
                                 
-
-                                Console.WriteLine("Запись удалена!");
                             }
                             Console.ReadKey();
                             break;
                         }
-                    case "5":
+                    //case "5":
+                    //    {
+                    //        Console.Clear();
+                    //        DateBook dateBook = new DateBook(path);
+                    //        dateBook.OrderRecords();
+                    //        Console.WriteLine("Упорядочивание записей завершено");
+                    //        Console.ReadKey();
+                    //        break;
+                    //    }
+                    case "6":
                         {
                             Console.Clear();
-                            DateBook dateBook = new DateBook(path);
-                            dateBook.OrderRecords();
-                            Console.WriteLine("Упорядочивание записей завершено");
-                            Console.ReadKey();
+                            dateBook.Save(path);
+                            Console.WriteLine("Все изменения сохранены!");
+                            Console.ReadLine();
                             break;
                         }
                     default: break;
@@ -141,59 +198,7 @@ namespace Homework_Theme7_task1._1
             return number;
         }
 
-        /// <summary>
-        /// Ручное добавление записи
-        /// </summary>
-        static void ManualAdd()
-        {
-            DateBook dateBook = new DateBook(path);
-
-            Console.WriteLine("\tВведите имя партнера:");
-            string partName = Console.ReadLine();
-            Console.WriteLine("\tВведите сумму платежа:");
-            int incom = EnterNumber();
-            Console.WriteLine("\tНомер счета:");
-            int account = EnterNumber();
-            Console.WriteLine("\tЦель платежа:");
-            string purp = Console.ReadLine();
-
-            dateBook.Add(new Record(DateTime.Now, partName, incom, account, purp));
-
-            dateBook.Save(path);
-            Console.WriteLine("Запись добавлена!");
-        }
-
-        /// <summary>
-        /// Добавление записей из файла
-        /// </summary>
-        static void FileAdd()
-        {
-            DateBook sourceBook = new DateBook(source);
-            sourceBook.SaveToFile(path);
-            Console.WriteLine($"Добавлено записей: {sourceBook.Count}");
-        }
-
-        /// <summary>
-        /// Изменение выбранной записи
-        /// </summary>
-        static void ChangeRecord()
-        {
-            DateBook dateBook = new DateBook(path);
-
-            int recordNumber;
-
-            do
-            {
-                Console.WriteLine("Введите номер записи для редактирования:");
-                recordNumber = EnterNumber()-1;
-            }
-            while (dateBook.Count<recordNumber || recordNumber<1);
-            
-
-            
-            dateBook.ChangeRecord(recordNumber, path);
-            Console.WriteLine("Запись изменена!");
-        }
+       
     }
 
 
