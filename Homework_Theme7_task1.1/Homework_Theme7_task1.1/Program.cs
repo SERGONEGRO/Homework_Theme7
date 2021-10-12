@@ -159,15 +159,14 @@ namespace Homework_Theme7_task1._1
                             Console.ReadKey();
                             break;
                         }
-                    //case "5":
-                    //    {
-                    //        Console.Clear();
-                    //        DateBook dateBook = new DateBook(path);
-                    //        dateBook.OrderRecords();
-                    //        Console.WriteLine("Упорядочивание записей завершено");
-                    //        Console.ReadKey();
-                    //        break;
-                    //    }
+                    case "5":
+                        {
+                            Console.Clear();
+                            dateBook.OrderRecords();
+                            Console.WriteLine("Упорядочивание записей завершено");
+                            Console.ReadKey();
+                            break;
+                        }
                     case "6":
                         {
                             Console.Clear();

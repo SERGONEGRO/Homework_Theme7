@@ -156,31 +156,11 @@ namespace Homework_Theme7_task1._1
         /// </summary>
         public void OrderRecords()
         {
-            //непонятная сортировка, нашел в интернете.
-            Array.Sort(records, (a, b) => a.Date.CompareTo(b.Date));
-
-            string temp = String.Format("{0},{1},{2},{3},{4}",
-                                               this.titles[0],
-                                               this.titles[1],
-                                               this.titles[2],
-                                               this.titles[3],
-                                               this.titles[4]);
-
-            File.Delete(path);
-            File.AppendAllText(path, $"{temp}\n", Encoding.Default);
-
-            for (int i = 0; i < this.index; i++)
-            {
-                temp = String.Format("{0},{1},{2},{3},{4}",
-                                        this.records[i].Date,
-                                        this.records[i].PartnerName,
-                                        this.records[i].Income,
-                                        this.records[i].PaymentAccount,
-                                        this.records[i].Purpose);
-               
-                File.AppendAllText(path, $"{temp}\n", Encoding.Default);
-                
-            }
+            List<Record> tmp = new List<Record>(records);
+            var sortedTmp = from r in tmp
+                            orderby r.Date
+                            select r;
+            records = sortedTmp.ToArray();
         }
 
         /// <summary>
