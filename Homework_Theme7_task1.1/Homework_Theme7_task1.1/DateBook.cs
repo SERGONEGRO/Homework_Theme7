@@ -248,7 +248,7 @@ namespace Homework_Theme7_task1._1
         public void OrderRecords()
         {
             //непонятная сортировка, нашел в интернете.
-            Array.Sort(records, (a, b) => a.Date.CompareTo(b.Date));
+            records = records.OrderBy(i => i.Date).ToArray();
 
             string temp = String.Format("{0},{1},{2},{3},{4}",
                                                this.titles[0],
