@@ -43,7 +43,8 @@ namespace Homework_Theme7_task1._1
 
                 switch (answer)
                 {
-                    case "1":
+                    
+                    case "1":   //показ записей
                         {
                             Console.Clear();
 
@@ -53,7 +54,7 @@ namespace Homework_Theme7_task1._1
 
                             break;
                         }
-                    case "2":
+                    case "2":   //добавление записей
                         {
                             Console.Clear();
                             Console.WriteLine("Если нужно загрузить из файла, нажмите 1.\nЕсли нужно загрузить вручную, нажмите любую кнопку.");
@@ -82,14 +83,14 @@ namespace Homework_Theme7_task1._1
 
                                 dateBook.Add(new Record(DateTime.Now, partName, incom, account, purp));
 
-                                dateBook.Save(path);
+                                //dateBook.Save(path);
                                 Console.WriteLine("Запись добавлена!");
                             }
                             
                             Console.ReadKey();
                             break;
                         }
-                    case "3":
+                    case "3":   //редактирование записей
                         {
                             Console.Clear();
 
@@ -100,7 +101,7 @@ namespace Homework_Theme7_task1._1
                                 Console.WriteLine("Введите номер записи для редактирования:");
                                 recordNumber = EnterNumber() - 1;
                             }
-                            while (dateBook.records.Length < recordNumber || recordNumber < 1);
+                            while (dateBook.records.Length < recordNumber && recordNumber < 1);
 
                             Console.WriteLine($"Редактируется запись:\n{dateBook.records[recordNumber].Print()}");
                            
@@ -125,7 +126,7 @@ namespace Homework_Theme7_task1._1
                             Console.ReadKey();
                             break;
                         }
-                    case "4":
+                    case "4":   //удаление записей
                         {
                             Console.Clear();
                            
@@ -159,7 +160,7 @@ namespace Homework_Theme7_task1._1
                             Console.ReadKey();
                             break;
                         }
-                    case "5":
+                    case "5":   //упорядочивание записей по дате
                         {
                             Console.Clear();
                             dateBook.OrderRecords();
@@ -167,7 +168,7 @@ namespace Homework_Theme7_task1._1
                             Console.ReadKey();
                             break;
                         }
-                    case "6":
+                    case "6":   //сохранение записей
                         {
                             Console.Clear();
                             dateBook.Save(path);

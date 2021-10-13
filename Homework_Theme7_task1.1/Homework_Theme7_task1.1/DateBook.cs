@@ -157,10 +157,14 @@ namespace Homework_Theme7_task1._1
         public void OrderRecords()
         {
             List<Record> tmp = new List<Record>(records);
+            tmp.RemoveRange(index,tmp.Count-index);   //удаляем пустые значения
+            
             var sortedTmp = from r in tmp
                             orderby r.Date
                             select r;
+            
             records = sortedTmp.ToArray();
+            
         }
 
         /// <summary>
@@ -170,13 +174,16 @@ namespace Homework_Theme7_task1._1
         {
             Console.WriteLine($"{this.titles[0],10} {this.titles[1],20} {this.titles[2],20} {this.titles[3],20} {this.titles[4],30}");
             
+            //records = records.Where(x => x != null).ToArray();
             if (this.records.Length>0 )
             {
                 for (int i = 0; i < index; i++)
-                {
-                    Console.WriteLine($"{i + 1}  {this.records[i].Print()}");
-                    Console.WriteLine();
-                }
+                    { 
+                        Console.WriteLine($"{i + 1}  {this.records[i].Print()}");
+                        Console.WriteLine();
+                    }
+                        
+                   
             }
         }
 
