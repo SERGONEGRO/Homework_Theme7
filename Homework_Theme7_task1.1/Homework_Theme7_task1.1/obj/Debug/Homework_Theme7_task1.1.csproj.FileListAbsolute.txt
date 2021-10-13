@@ -5,3 +5,10 @@ C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Ho
 C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\bin\Debug\Homework_Theme7_task1.1.pdb
 C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.exe
 C:\Users\User\Source\Repos\SERGONEGRO\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.pdb
+E:\_учеба\Homework_7\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\bin\Debug\Homework_Theme7_task1.1.exe.config
+E:\_учеба\Homework_7\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\bin\Debug\Homework_Theme7_task1.1.exe
+E:\_учеба\Homework_7\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\bin\Debug\Homework_Theme7_task1.1.pdb
+E:\_учеба\Homework_7\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.csproj.AssemblyReference.cache
+E:\_учеба\Homework_7\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.csproj.CoreCompileInputs.cache
+E:\_учеба\Homework_7\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.exe
+E:\_учеба\Homework_7\Homework_Theme7\Homework_Theme7_task1.1\Homework_Theme7_task1.1\obj\Debug\Homework_Theme7_task1.1.pdb
